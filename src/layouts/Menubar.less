@@ -1,0 +1,40 @@
+@import "../less/abstracts/variables";
+@import "../less/abstracts/mixin";
+
+.menubar-layout{
+  .abs-full;
+  .flexbox;
+}
+.menubar{
+  width: 70px;
+  .flex(none);
+  background: @color-primary;
+  color: #ffffff;
+}
+.menubar-right-container{
+  .flex(auto)
+}
+.menubar-item{
+  padding: 15px 5px;
+  text-align: center;
+  position: relative;
+  min-height: 40px;
+  .flexbox;
+  .align-items(center);
+  .justify-content(center);
+}
+.menubar-item-active:before{
+  content: ' ';
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -5px;
+  .horn(left,#fff,9px,5px);
+}
+.menubar-item-icon-no-active{
+  opacity: 0.7;
+}
+.menubar-item-icon-no-active:hover{
+  opacity:1;
+}

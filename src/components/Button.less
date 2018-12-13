@@ -1,0 +1,66 @@
+@import "../less/abstracts/variables";
+
+.btn{
+  display: block;
+  box-sizing: border-box;
+  height: 36px;
+  line-height: 26px;
+  padding: 5px 20px;
+  font-size:16px;
+  text-align: center;
+  border-radius: 4px;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary{
+  background: @color-btn-primary;
+}
+.btn-primary:hover{
+  background: @color-btn-primary-hover;
+}
+.btn-primary:active{
+  background: @color-btn-primary-active;
+}
+.btn-primary.btn_disabled,.btn-primary.btn_disabled:hover,.btn-primary.btn_disabled:active{
+  background: @color-btn-primary-disabled;
+}
+.btn-danger{
+  background: @color-btn-danger;
+}
+.btn-danger:hover{
+  background: @color-btn-danger-hover;
+}
+.btn-danger:active{
+  background: @color-btn-danger-active;
+}
+.btn-danger.btn_disabled,.btn-danger.btn_disabled:hover,.btn-danger.btn_disabled:active{
+  background: @color-btn-danger-disabled;
+}
+.btn-warning{
+  background: @color-btn-warning;
+}
+.btn-warning:hover{
+  background: @color-btn-warning-hover;
+}
+.btn-warning:active{
+  background: @color-btn-warning-active;
+}
+.btn-warning.btn_disabled,.btn-warning.btn_disabled:hover,.btn-warning.btn_disabled:active{
+  background: @color-btn-warning-disabled;
+}
+.btn-normal{
+  background: @color-btn-normal;
+}
+.btn-normal:hover{
+  background: @color-btn-normal-hover;
+}
+.btn-normal:active{
+  background: @color-btn-normal-active;
+}
+.btn-normal.btn_disabled,.btn-normal.btn_disabled:hover,.btn-normal.btn_disabled:active{
+  background: @color-btn-normal-disabled;
+}
+.btn_round{
+  border-radius: 80px;
+}

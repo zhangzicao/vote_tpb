@@ -3,13 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "classnames": "^2.2.6",
     "electron": "^3.0.10",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1"
   },
   "scripts": {
     "start": "react-app-rewired start",
+    "dev": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
@@ -33,5 +36,5 @@
   },
   "main": "main.js",
   "homepage": ".",
-  "DEV": false
+  "DEV": true
 }

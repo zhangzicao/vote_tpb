@@ -1,0 +1,49 @@
+/**
+ * 定义一些HTML元素公认的标准样式
+ */
+html,body{
+  height: 100%;
+}
+body{
+  background-color:#fcfcfc;
+  color:#333;
+  -webkit-overflow-scrolling: touch;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+}
+a{color: #333}
+a:hover{ text-decoration: none;}
+::-webkit-input-placeholder { color:#999;}
+
+//主要padding
+.content-padding{padding:@padding-primary}
+//不换行
+.nowrap{white-space: nowrap}
+//浮动
+.f-l{float: left;}
+.f-r{float: right;}
+//对齐
+.text-c{text-align: center;}
+.text-l{text-align: left;}
+.text-r{text-align: right;}
+/*显示隐藏*/
+.ui-show{display: block !important;}
+.ui-hide{display: none !important;}
+
+//颜色
+.color-primary {color:@color-primary;}
+.color-warning {color:@color-warning;}
+.color-danger {color:@color-danger;}
+.color-success {color:@color-success;}
+.color-normal {color:@color-normal;}
+
+.color-grey{color: #999}
+.color-red{color: #f41d1d}
+.color-green{color: #4caf50}
+.color-yellow{color: #dcc200}
+.color-org{color: #ff9800}
+.color-blue{color: #2196f3}
+.color-purple{color: #673ab7}
+.color-brown{color: #a24617}
