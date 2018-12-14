@@ -1,19 +1,8 @@
-import React, { Component } from 'react';
+import React  from 'react';
 import Button from "@/components/Button"
+import "@/less/pages/BrushVotesCookieType.less"
 
-class Home extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    };
-  }
-  tabTo(index){
-    this.setState(function (prevState, props) {
-      return {
-       };
-    })
-  }
+class BrushVotesCookieType extends React.PureComponent {
   render() {
     return (
         <header className="App-header">
@@ -34,4 +23,4 @@ class Home extends React.PureComponent {
   }
 }
 
-export default Home;
+export default BrushVotesCookieType;

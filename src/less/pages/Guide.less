@@ -1,0 +1,48 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixin";
+
+.guide-content{
+  min-height: 100%;
+  .flexbox;
+  .justify-content(center);
+  .align-items(center);
+}
+.logo-wrap{
+  text-align: center;
+  padding: 30px 30px 40px 30px;
+}
+.app-desc{
+  font-size: @font-size-ll;
+  color: #333333;
+  text-align: center;
+  line-height: 1.6;
+}
+.app-desc-secondary{
+  font-size: @font-size-l;
+  color: #555;
+  text-align: center;
+  line-height: 1.6;
+}
+.guide-footer{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: #a0a0a0;
+  font-size: @font-size-xs;
+}
+.app-grid-list-1{
+  margin-top: 60px;
+}
+
+//欢迎页面
+.welcome-content{
+  .abs-full;
+  .scrollable;
+  .flexbox;
+  .justify-content(center);
+  .align-items(center);
+}
+.app-welcome-btnwr{
+  margin: 60px auto 30px auto;
+  width: 150px;
+}

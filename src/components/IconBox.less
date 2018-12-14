@@ -1,0 +1,45 @@
+@import "../less/abstracts/variables";
+@import "../less/abstracts/mixin";
+
+.app-grid-list{
+  text-align: center;
+  .clearfix;
+  .flexbox;
+  .justify-content(center);
+}
+.app-grid-item{
+  .flexbox;
+  .justify-content(center);
+  .align-items(center);
+  width: 150px;
+  margin: 20px;
+}
+.app-grid-item__icon-wr{
+  display: block;
+  position: relative;
+}
+.app-grid-item_show-overlay:hover .app-grid-item__icon-wr:before{
+  content: ' ';
+  display: block;
+  .abs-full;
+  background: rgba(255,255,255,.3);
+  z-index: 1;
+}
+.app-grid-item__icon{
+  display: block;
+  position: relative;
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+.app-grid-item_round .app-grid-item__icon{
+  border-radius: 50%;
+}
+.app-grid-item__text{
+  margin-top: 10px;
+  font-size:@font-size-base;
+}
+.app-grid-item__desc{
+  margin-top: 2px;
+  font-size:@font-size-xs;
+}

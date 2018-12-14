@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import './Button.less';
+import {Link} from "react-router-dom";
 
 class Button extends Component {
   render() {
@@ -10,9 +11,13 @@ class Button extends Component {
       ['btn-'+this.props.color]:true,
       'btn_disabled':this.props.disabled,
       'btn_round':this.props.round,
-    });
+    })+" "+(this.props.className||"");
+    let Wrap="button";
+    if(this.props.to){
+      Wrap=Link;
+    }
     return (
-        <button type={this.props.type} className={btnClass}>{this.props.children}</button>
+        <Wrap to={this.props.to} type={this.props.type} className={btnClass}>{this.props.children}</Wrap>
     );
   }
 }

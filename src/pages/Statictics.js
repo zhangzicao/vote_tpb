@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import Button from "@/components/Button"
+import React  from 'react';
 
 class Statictics extends React.PureComponent {
   constructor(props) {
