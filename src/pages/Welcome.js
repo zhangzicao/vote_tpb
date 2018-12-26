@@ -11,7 +11,7 @@ class Welcome extends React.PureComponent {
             <div className="app-desc">用于投票吧vote8的刷投票的HTML5桌面应用</div>
             <div className="app-desc-secondary">基于electron+react开发</div>
             <div className="app-welcome-btnwr">
-              <Button type="button" color="primary" round={true} to="/index/guide">开始使用</Button>
+              <Button type="button" color="primary" round={true} to="/index/guide" size="l">开始使用</Button>
             </div>
           </div>
           <div className="guide-footer">

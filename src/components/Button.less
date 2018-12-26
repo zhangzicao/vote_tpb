@@ -1,67 +1,110 @@
 @import "../less/abstracts/variables";
 
 .btn{
-  display: block;
-  width: 100%;
+  display: inline-block;
   box-sizing: border-box;
-  height: 36px;
-  line-height: 26px;
+  height: @form-line-height;
+  line-height: @form-line-height - 10;
   padding: 5px 20px;
-  font-size:16px;
+  font-size:@form-font-size;
   text-align: center;
   border-radius: 4px;
   color: #ffffff;
   border: none;
   cursor: pointer;
+  transition:background-color,border-color,box-shaow, 0.3s;
+}
+.btn:hover{
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
 }
 .btn-primary{
-  background: @color-btn-primary;
+  background: @btn-color-primary;
 }
 .btn-primary:hover{
-  background: @color-btn-primary-hover;
+  background: @btn-color-primary-hover;
 }
 .btn-primary:active{
-  background: @color-btn-primary-active;
+  background: @btn-color-primary-active;
 }
 .btn-primary.btn_disabled,.btn-primary.btn_disabled:hover,.btn-primary.btn_disabled:active{
-  background: @color-btn-primary-disabled;
+  background: @btn-color-primary-disabled;
 }
 .btn-danger{
-  background: @color-btn-danger;
+  background: @btn-color-danger;
 }
 .btn-danger:hover{
-  background: @color-btn-danger-hover;
+  background: @btn-color-danger-hover;
 }
 .btn-danger:active{
-  background: @color-btn-danger-active;
+  background: @btn-color-danger-active;
 }
 .btn-danger.btn_disabled,.btn-danger.btn_disabled:hover,.btn-danger.btn_disabled:active{
-  background: @color-btn-danger-disabled;
+  background: @btn-color-danger-disabled;
 }
 .btn-warning{
-  background: @color-btn-warning;
+  background: @btn-color-warning;
 }
 .btn-warning:hover{
-  background: @color-btn-warning-hover;
+  background: @btn-color-warning-hover;
 }
 .btn-warning:active{
-  background: @color-btn-warning-active;
+  background: @btn-color-warning-active;
 }
 .btn-warning.btn_disabled,.btn-warning.btn_disabled:hover,.btn-warning.btn_disabled:active{
-  background: @color-btn-warning-disabled;
+  background: @btn-color-warning-disabled;
 }
 .btn-normal{
-  background: @color-btn-normal;
+  background: @btn-color-normal;
 }
 .btn-normal:hover{
-  background: @color-btn-normal-hover;
+  background: @btn-color-normal-hover;
 }
 .btn-normal:active{
-  background: @color-btn-normal-active;
+  background: @btn-color-normal-active;
 }
 .btn-normal.btn_disabled,.btn-normal.btn_disabled:hover,.btn-normal.btn_disabled:active{
-  background: @color-btn-normal-disabled;
+  background: @btn-color-normal-disabled;
 }
 .btn_round{
-  border-radius: 80px;
+  border-radius: 100px;
+}
+.btn_block{
+  display: block;
+  width: 100%;
+}
+.btn.size-l{
+  height: @form-line-height-l;
+  line-height: @form-line-height-l - 10;
+  padding: 5px 17px;
+  font-size: 20px;
+}
+.btn.size-ll{
+  height: @form-line-height-ll;
+  line-height: @form-line-height-ll - 10;
+  padding: 5px 24px;
+  font-size: 24px;
+}
+.btn.size-s{
+  height: @form-line-height-s;
+  line-height: @form-line-height-s - 10;
+  padding: 5px 10px;
+}
+.btn.size-xs{
+  height: @form-line-height-xs;
+  line-height: @form-line-height-xs - 10;
+  padding: 5px 8px;
+  font-size: 13px;
+}
+.btn.size-mini{
+  height: @form-line-height-mini;
+  line-height: @form-line-height-mini - 10;
+  padding: 5px 6px;
+  font-size: 13px;
+}
+.btns-bar{
+  padding: 10px;
+  margin-top: 25px;
+}
+.btns-bar>.btn{
+  margin:0 10px
 }

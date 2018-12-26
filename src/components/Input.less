@@ -1,0 +1,87 @@
+@import "../less/abstracts/variables";
+@import "../less/abstracts/mixin";
+
+.input{
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  height: @form-line-height;
+  line-height: @form-line-height - 12;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid @form-input-border-color;
+  padding: 5px 15px;
+  font-size:@form-font-size;
+  text-align: left;
+  background: @form-input-bg;
+  color: @form-input-color;
+}
+//.input:focus{
+//  border-bottom-color: @form-input-border-color-active;
+//}
+.input.size-l{
+  height: @form-line-height-l;
+  line-height: @form-line-height-l - 12;
+  padding: 5px 15px;
+  font-size:@form-font-size-l;
+}
+.input.size-ll{
+  height: @form-line-height-ll;
+  line-height: @form-line-height-ll - 12;
+  padding: 5px 20px;
+  font-size:@form-font-size-ll;
+}
+.input.size-s{
+  height: @form-line-height-s;
+  line-height: @form-line-height-s - 12;
+  padding: 5px 8px;
+  font-size:@form-font-size-s;
+}
+.input.size-xs{
+  height: @form-line-height-xs;
+  line-height: @form-line-height-xs - 12;
+  padding: 5px 6px;
+  font-size:@form-font-size-xs;
+}
+.input.size-mini{
+  height: @form-line-height-mini;
+  line-height: @form-line-height-mini - 12;
+  padding: 5px 4px;
+  font-size:@form-font-size-mini;
+}
+.input.text-c{
+  text-align: center;
+}
+.input.text-l{
+  text-align: left;
+}
+.input.text-r{
+  text-align: right;
+}
+.input[disabled]{
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+//input容器
+.input-wrap{
+  display: block;
+  position: relative;
+}
+.input-bottom-line{
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid @form-input-border-color-active;
+  animation: horizontal-expand 0.26s;
+}
+.input:focus~.input-bottom-line{
+  display: block;
+}
+.input.input_disabled~.input-bottom-line, .input.input_readonly~.input-bottom-line{
+  display: none;
+}
+.horizontal-expand();

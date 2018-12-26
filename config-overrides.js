@@ -9,9 +9,12 @@ const {injectBabelPlugin} = require('react-app-rewired');
 const rewireLess = require('react-app-rewire-less');
 
 module.exports = function override(config, env) {
+  //less
   config = rewireLess.withLoaderOptions({
     javascriptEnabled: true
   })(config, env);
+
+  //alias
   config.resolve.alias = {
     ...config.resolve.alias,
     '@': resolve('src')

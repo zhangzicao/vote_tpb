@@ -75,3 +75,8 @@ app.on('activate', () => {
 // 文件模块
 // const BTFile = require('./sys_modules/BTFile')
 // BTFile.getAppPath()
+//
+app.on('ready', function () {
+  let BrushVote=require('./app_modules/BrushVote')
+  global.BrushVote=BrushVote
+})

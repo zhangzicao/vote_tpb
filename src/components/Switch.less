@@ -1,0 +1,77 @@
+@import "../less/abstracts/variables";
+@import "../less/abstracts/mixin";
+
+@color-switch-checked:@color-primary;
+
+.switch{
+  font-family: "Chinese Quote",-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5;
+  color: rgba(0,0,0,0.65);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  top: -1px;
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 22px;
+  min-width: 44px;
+  line-height: 20px;
+  vertical-align: middle;
+  border-radius: 100px;
+  border: 1px solid transparent;
+  background-color: rgba(0,0,0,0.25);
+  cursor: pointer;
+  -webkit-transition: all .36s;
+  transition: all .36s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.switch-checked{
+  background-color: @color-switch-checked;
+}
+.switch:focus {
+  box-shadow: 0 0 0 2px rgba(24,144,255,0.2);
+  outline: 0;
+}
+.switch:after {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 1px;
+  top: 1px;
+  border-radius: 18px;
+  background-color: #fff;
+  content: ' ';
+  cursor: pointer;
+  -webkit-transition: all .36s cubic-bezier(.78, .14, .15, .86);
+  transition: all .36s cubic-bezier(.78, .14, .15, .86);
+  box-shadow: 0 2px 4px 0 rgba(0,35,11,0.2);
+}
+.switch-checked:after {
+  left: 100%;
+  -webkit-transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  transform: translateX(-100%);
+  margin-left: -1px;
+}
+.switch-inner{
+  color: #fff;
+  font-size: 12px;
+  margin-left: 24px;
+  margin-right: 6px;
+  display: block;
+}
+.switch-checked .switch-inner {
+  margin-left: 6px;
+  margin-right: 24px;
+}
+.switch[disabled]{
+  opacity: 0.7;
+  cursor: not-allowed;
+}

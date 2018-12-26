@@ -1,0 +1,31 @@
+@import "../less/abstracts/variables";
+@import "../less/abstracts/mixin";
+
+.form{
+  padding: 10px 15px;
+  .clearfix;
+}
+.form-item{
+  .flexbox;
+  position: relative;
+  float: left;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 15px;
+  margin-top: 15px;
+  .align-items(center);
+}
+.form-item-label, .form-item-prefix ,.form-item-suffix{
+  .flex(none);
+}
+.form-item-label{
+  text-align: right;
+}
+.form-input-block{
+  .flex(auto);
+}
+.form .btns-bar{
+  float: left;
+  width: 100%;
+  box-sizing: border-box;
+}

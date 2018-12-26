@@ -1,23 +1,23 @@
-.abs-full{
+.abs-full(){
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
 }
-.unselect{
+.unselect(){
   -webkit-user-select: none;
   -ms-user-select: none;
   -moz-user-select: none;
 }
-.ellipsis{
+.ellipsis(){
   white-space: nowrap;
   word-wrap: normal;
   overflow: hidden;
   -ms-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
-.line-clamp-2{
+.line-clamp-2(){
   white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -52,7 +52,7 @@
   background-image: url("data:image/svg+xml;charset=utf-8,@{url}");
 }
 
-.preloader {
+.preloader() {
   width: 20px;
   height: 20px;
   transform-origin: 50%;
@@ -67,11 +67,10 @@
     background-position: 50%;
     background-size: 100%;
   }
-}
-
-@keyframes preloader-spin {
-  100% {
-    transform: rotate(360deg);
+  @keyframes preloader-spin {
+    100% {
+      transform: rotate(360deg);
+    }
   }
 }
 
@@ -189,6 +188,38 @@
   -webkit-align-self: @as;
   align-self: @as;
 }
+.flex-direction(@direct) when(@direct = row) {
+  -ms-box-direction: normal;
+  -webkit-box-direction: normal;
+  -ms-box-orient: horizontal;
+  -webkit-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+}
+.flex-direction(@direct) when(@direct = column) {
+  -ms-box-direction: normal;
+  -webkit-box-direction: normal;
+  -ms-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+.flex-direction(@direct) when(@direct = row-reverse) {
+  -ms-box-direction: reverse;
+  -webkit-box-direction: reverse;
+  -ms-box-orient: horizontal;
+  -webkit-box-orient: horizontal;
+  -webkit-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+}
+.flex-direction(@direct) when(@direct = column-reverse) {
+  -ms-box-direction: reverse;
+  -webkit-box-direction: reverse;
+  -ms-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column-reverse;
+  flex-direction: column-reverse;
+}
 
 //from L7
 .scrollable(){
@@ -196,7 +227,7 @@
   -webkit-overflow-scrolling: touch;
 }
 
-.clearfix, .cl{
+.clearfix(){
   &:before,
   &:after {
     content: " ";
@@ -205,6 +236,9 @@
   &:after {
     clear: both;
   }
+}
+.cl(){
+  .clearfix;
 }
 .hairline(@position, @color) when (@position = top) {
   &:before {
@@ -316,43 +350,6 @@
   }
 }
 
-/*
-.hairline(@position, @color) when (@position = top) {
-  border-top: 1px solid @color;
-}
-.hairline(@position, @color) when (@position = left) {
-  border-left: 1px solid @color;
-}
-.hairline(@position, @color) when (@position = bottom) {
-  border-bottom: 1px solid @color;
-}
-.hairline(@position, @color) when (@position = right) {
-  border-right: 1px solid @color;
-}
-// For right and bottom
-.hairline-remove(@position) when not (@position = left) and not (@position = top) {
-  border-left: 0;
-  border-bottom: 0;
-}
-// For left and top
-.hairline-remove(@position) when not (@position = right) and not (@position = bottom) {
-  border-right: 0;
-  border-top: 0;
-}
-// For right and bottom
-.hairline-color(@position, @color) when not (@position = left) and not (@position = top) {
-  border-right-color: @color;
-  border-bottom-color: @color;
-}
-// For left and top
-.hairline-color(@position, @color) when not (@position = right) and not (@position = bottom) {
-  border-left-color: @color;
-  border-top-color: @color;
-}
-*/
-
-
-
 //from ratchet
 .linear-gradient(@color-from, @color-to) {
   background-color: @color-from; // Old browsers
@@ -373,4 +370,25 @@
   background-image:      -o-linear-gradient(@deg, @color-from 0%, @color-to 100%);           // Opera 11.10+
   background-image:         linear-gradient(@deg, @color-from 0%, @color-to 100%);     // W3C
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{@color-from}', endColorstr='#{@color-to}', GradientType=1 ); // IE6-9
+}
+
+
+//动画
+.horizontal-expand(){
+  @keyframes horizontal-expand {
+    0% {
+      -webkit-transform: scaleX(0);
+      -moz-transform: scaleX(0);
+      -ms-transform: scaleX(0);
+      -o-transform: scaleX(0);
+      transform: scaleX(0);
+    }
+    100% {
+      -webkit-transform: scaleX(1);
+      -moz-transform: scaleX(1);
+      -ms-transform: scaleX(1);
+      -o-transform: scaleX(1);
+      transform: scaleX(1);
+    }
+}
 }

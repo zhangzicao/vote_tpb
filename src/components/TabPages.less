@@ -1,0 +1,59 @@
+@import "../less/abstracts/variables";
+@import "../less/abstracts/mixin";
+
+@itemColor:#555;
+@itemActiveColor:@color-primary;
+@itemBg:#f0f0f0;
+@itemHoverBg:#e3e3e3;
+@itemBorderColor:#ccc;
+
+.tab-container{
+  .flexbox;
+  .flex-direction(column);
+}
+.tabs{
+  .flex(none);
+  .clearfix;
+}
+.tabs-item{
+  display: block;
+  float: left;
+  padding: 0 10px;
+  line-height: 30px;
+  text-align: center;
+  background: @itemBg;
+  border: 1px solid @itemBorderColor;
+  color: @itemColor;
+  cursor: pointer;
+}
+.tabs-item+.tabs-item{
+  margin-left: -1px;
+}
+.tabs-item:hover{
+  background:@itemHoverBg;
+}
+.tabs-item.active{
+  color:#fff;
+  background-color:@itemActiveColor;
+  border-color:@itemActiveColor;
+}
+.tabs-item a{
+  display: block;
+  color:@itemColor;
+  margin: 0 -10px;
+  padding: 0 10px;
+}
+.tabs-item.active a{
+  color:#fff;
+}
+.tab-panels{
+  .flex(1);
+}
+.tab-panel{
+  height: 100%;
+  display: none;
+  .scrollable;
+}
+.tab-panel.current{
+  display: block;
+}

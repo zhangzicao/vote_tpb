@@ -6,16 +6,24 @@ html,body{
 }
 body{
   background-color:#fcfcfc;
-  color:#333;
+  color: @color-text;
   -webkit-overflow-scrolling: touch;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
+  font-size:@font-size-base;
 }
-a{color: #333}
+a{color: @color-text}
 a:hover{ text-decoration: none;}
-::-webkit-input-placeholder { color:#999;}
+::-webkit-input-placeholder { color:@color-placeholder;}
+
+//mixin
+.clearfix,.cl{.clearfix;}
+.unselect{.unselect;}
+.ellipsis{.ellipsis;}
+.abs-full{.abs-full;}
+.line-clamp-2{.line-clamp-2;}
+.preloader{.preloader;}
 
 //主要padding
 .content-padding{padding:@padding-primary}
@@ -39,11 +47,11 @@ a:hover{ text-decoration: none;}
 .color-success {color:@color-success;}
 .color-normal {color:@color-normal;}
 
-.color-grey{color: #999}
-.color-red{color: #f41d1d}
-.color-green{color: #4caf50}
-.color-yellow{color: #dcc200}
-.color-org{color: #ff9800}
-.color-blue{color: #2196f3}
-.color-purple{color: #673ab7}
-.color-brown{color: #a24617}
+.color-grey{color: @color-grey}
+.color-red{color: @color-red}
+.color-green{color: @color-green}
+.color-yellow{color: @color-yellow}
+.color-org{color: @color-org}
+.color-blue{color: @color-blue}
+.color-purple{color: @color-purple}
+.color-brown{color: @color-brown}
