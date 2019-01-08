@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import './Button.less';
 import {Link} from "react-router-dom";
 
-export default class Button extends Component {
+export default class Button extends React.PureComponent {
   render() {
     let btnClass = classnames({
       'btn': true,
@@ -43,7 +43,7 @@ Button.defaultProps={
 }
 
 //按钮条
-export class ButtonBar extends Component {
+export class ButtonBar extends React.PureComponent {
   render() {
     return (
         <div style={{'textAlign':this.props.align}} className="btns-bar">{this.props.children}</div>

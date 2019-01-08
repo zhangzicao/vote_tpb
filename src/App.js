@@ -16,6 +16,7 @@ class App extends Component {
     }
     if(nextProps.location.pathname!==this.props.location.pathname){
       let toIndex=this.getIndexByLocation(nextProps);
+      if(toIndex===this.state.activeIndex) return true;
       this.setState({
         activeIndex:toIndex
       })
@@ -24,13 +25,13 @@ class App extends Component {
   }
   getIndexByLocation(props){
     let toIndex=-1;
-    if(props.location.pathname==="/index/guide"){
+    if(props.location.pathname.search("/guide")>-1){
       toIndex=0;
-    }else if(props.location.pathname==="/index/brushVotes/cookieType"){
+    }else if(props.location.pathname.search("/brushVotes/cookieType")>-1){
       toIndex=1;
-    }else if(props.location.pathname==="/index/brushVotes/wechatType"){
+    }else if(props.location.pathname.search("/brushVotes/wechatType")>-1){
       toIndex=2;
-    }else if(props.location.pathname==="/index/statictics"){
+    }else if(props.location.pathname.search("/statictics")>-1){
       toIndex=3;
     }
     return toIndex
@@ -40,22 +41,22 @@ class App extends Component {
       <MenubarLayout>
         <Menubar>
           <MenubarItem
-              to="/index/guide"
+              to="/guide"
               icon={require('@/assets/icon_nav_guide.png')}
               active={this.state.activeIndex===0}>
           </MenubarItem>
           <MenubarItem
-              to="/index/brushVotes/cookieType"
+              to="/brushVotes/cookieType"
               icon={require('@/assets/icon_nav_vote_1.png')}
               active={this.state.activeIndex===1}>
           </MenubarItem>
           <MenubarItem
-              to="/index/brushVotes/wechatType"
+              to="/brushVotes/wechatType"
               icon={require('@/assets/icon_nav_vote_2.png')}
               active={this.state.activeIndex===2}>
           </MenubarItem>
           <MenubarItem
-              to="/index/statictics"
+              to="/statictics"
               icon={require('@/assets/icon_nav_statictics.png')}
               active={this.state.activeIndex===3}>
           </MenubarItem>

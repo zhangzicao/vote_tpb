@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React  from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import './IconBox.less';
 
-export class IconBoxContainer extends Component {
+export class IconBoxContainer extends React.PureComponent {
   render() {
     let componentClass='app-grid-list '+(this.props.className||"");
     return (
@@ -13,7 +13,7 @@ export class IconBoxContainer extends Component {
   }
 }
 
-export class IconBox extends Component {
+export class IconBox extends React.PureComponent {
   render() {
     let itemClass = classnames({
       'app-grid-item': true,

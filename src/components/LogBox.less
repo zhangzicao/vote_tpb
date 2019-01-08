@@ -1,0 +1,61 @@
+@import "../less/abstracts/variables";
+@import "../less/abstracts/mixin";
+
+.log-box{
+  .flexbox;
+  margin: 10px 0 0 0;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size:@font-size-xs;
+  color:@color-text;
+  line-height: 1.4;
+  height: 300px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,.3) ;
+  .scrollable;
+}
+.log-box-content{
+  .flex(auto);
+  .scrollable;
+  height: 100%;
+  padding: 0 7px;
+}
+.log-box-bar{
+  .flex(none);
+  height: 100%;
+  width: 30px;
+  padding: 5px;
+  box-sizing: border-box;
+  background: #fdfdfd;
+  border-right: 1px solid #ddd;
+  .flexbox;
+  .flex-direction(column-reverse);
+}
+.log-box-btn{
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid transparent;
+  outline: none;
+  margin-top: 5px;
+  background: transparent;
+}
+.log-box-btn img{
+  opacity: 0.7;
+}
+.log-box-btn:hover img{
+  opacity:1;
+}
+.log-box-btn:hover,.log-box-btn:active{
+  background: rgba(100,100,100,.1);
+  border: 1px solid rgba(100,100,100,.7);
+}
+.log-box-line{
+  display: block;
+  text-align: left;
+  margin-top: 4px;
+}
+.log-box-line-pre{
+  font-size:@font-size-mini;
+  color: @color-text-secondary;
+  margin-right: 5px;
+}

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import './Switch.less';
 
-export default class Switch extends Component {
+export default class Switch extends React.PureComponent {
   constructor(props){
     super(props);
     this.onClick=this.onClick.bind(this)

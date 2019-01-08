@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './Form.less';
 
-export class Form extends Component {
+export class Form extends React.PureComponent {
   render() {
     return (
         <form className={(this.props.className||"")+" form"}>
@@ -13,7 +13,7 @@ export class Form extends Component {
 }
 
 
-export class FormItem extends Component {
+export class FormItem extends React.PureComponent {
   render() {
     let pdArr=(this.props.horizontalPadding||"").split(' ');
     let leftPadding=pdArr[0]===""?null:pdArr[0]

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import './Input.less';
 
-export default class Input extends Component {
+export default class Input extends React.PureComponent {
   constructor(props){
     super(props);
     this.onChange=this.onChange.bind(this);

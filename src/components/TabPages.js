@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import './TabPages.less';
 
-export class Tabs extends Component {
+export class Tabs extends React.PureComponent {
   constructor(props){
     super(props);
     this.state={
@@ -51,7 +51,7 @@ Tabs.propTypes={
   onTab:PropTypes.func
 }
 
-export default class TabPages extends Component {
+export default class TabPages extends React.PureComponent {
   constructor(props){
     super(props);
     this.state={

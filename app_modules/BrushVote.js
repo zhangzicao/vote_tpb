@@ -36,7 +36,7 @@ BrushVote.prototype.init=function () {
   this.successTime=0;//成功次数
   this.errorTime=0;//失败次数
   this.abortedTime=0;//中断次数
-  this.exitTime=this.voteNum;//要终止的目标次数
+  // this.exitTime=this.voteNum;//要终止的目标次数
 
   if(this.localTest){
     this.hostname="localhost"
@@ -68,8 +68,8 @@ BrushVote.prototype.__random=function(start,end) {
 
 //开始投票
 BrushVote.prototype.start=function() {
-  let startTime=(new Date()).getTime();
-  this.startTime=startTime;
+  // let startTime=(new Date()).getTime();
+  // this.startTime=startTime;
 
   let useTimeStr="";
   if(this.useTime<250){
@@ -211,11 +211,11 @@ BrushVote.prototype.vote=function(currTime,callback) {
           let longitude=rs9&&rs9.length>0?rs9[1]:""
           let geoLocationEncode=rs10&&rs10.length>0?rs10[1]:""
           if(!voteOption){
-            this.errorExit(currTime,'第'+currTime+'次：'+obj.voteNo+"号不存在")
+            obj.errorExit(currTime,'第'+currTime+'次：'+obj.voteNo+"号不存在")
             return
           }
           if(htmlStr.search("投票已过截止时间")>-1){
-            this.errorExit(currTime,'第'+currTime+'次：投票已过截止时间')
+            obj.errorExit(currTime,'第'+currTime+'次：投票已过截止时间')
             return
           }
           if(rs&&rs.length>0){
@@ -415,7 +415,7 @@ BrushVote.prototype.log=function(a1) {
 BrushVote.prototype.destroy=function() {
   this.log('已销毁')
   this.voting=false;
-  this.exitTime=this.currTime;
+  // this.exitTime=this.currTime;
   clearTimeout(this.timer)
 
   Object.keys(this.reqCollection).forEach( (index) => {

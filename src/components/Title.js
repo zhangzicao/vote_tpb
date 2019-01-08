@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './Title.less';
 
-export default class Title extends Component {
+export default class Title extends React.PureComponent {
   render() {
     let {text, subText, ...titleProps}=this.props;
     return (

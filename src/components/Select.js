@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import './Select.less';
 
-export default class Select extends Component {
+export default class Select extends React.PureComponent {
   constructor(props){
     super(props);
     this.onChange=this.onChange.bind(this);
