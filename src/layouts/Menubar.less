@@ -2,8 +2,8 @@
 @import "../less/abstracts/mixin";
 
 .menubar-layout{
-  .abs-full;
-  .flexbox;
+  .abs-full();
+  .flexbox();
 }
 .menubar{
   width: 60px;
@@ -13,7 +13,7 @@
 }
 .menubar-right-container{
   .flex(auto);
-  .scrollable;
+  .scrollable();
   position: relative;
 }
 .menubar-item{
@@ -21,9 +21,10 @@
   text-align: center;
   position: relative;
   min-height: 40px;
-  .flexbox;
+  .flexbox();
   .align-items(center);
   .justify-content(center);
+  .unselect();
 }
 .menubar-item-active:before{
   content: ' ';

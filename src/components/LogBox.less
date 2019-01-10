@@ -2,7 +2,7 @@
 @import "../less/abstracts/mixin";
 
 .log-box{
-  .flexbox;
+  .flexbox();
   margin: 10px 0 0 0;
   border: 1px solid #ddd;
   background: #fff;
@@ -11,11 +11,11 @@
   line-height: 1.4;
   height: 300px;
   box-shadow: 2px 2px 6px rgba(0,0,0,.3) ;
-  .scrollable;
+  .scrollable();
 }
 .log-box-content{
   .flex(auto);
-  .scrollable;
+  .scrollable();
   height: 100%;
   padding: 0 7px;
 }
@@ -27,7 +27,7 @@
   box-sizing: border-box;
   background: #fdfdfd;
   border-right: 1px solid #ddd;
-  .flexbox;
+  .flexbox();
   .flex-direction(column-reverse);
 }
 .log-box-btn{

@@ -1,14 +1,13 @@
 import React  from 'react';
 import { connect } from 'react-redux'
-import { voteCreate, voteStart, voteEnd, votePause, voteContinue, voteLog ,voteLogClear, voteSave} from '../stores/actions'
+import { voteCreate, voteStart, voteEnd, votePause, voteContinue ,voteLogClear, voteSave} from '../stores/actions'
 import Button,{ButtonBar} from "@/components/Button"
 import {Form,FormItem} from "@/components/Form"
 import Input from "@/components/Input"
 import Select from "@/components/Select"
 import Switch from "@/components/Switch"
 import LogBox from "@/components/LogBox"
-import { handleInputChange} from "@/scripts/common"
-import BrushVote from "@/scripts/BrushVote"
+import { handleInputChange,switchChange} from "@/scripts/common"
 import "@/less/pages/vote.less"
 
 class VoteCookieType extends React.PureComponent {
@@ -25,13 +24,11 @@ class VoteCookieType extends React.PureComponent {
       voteId:this.props.match.params.id,
     };
     this.handleChange=handleInputChange.bind(this)
-    this.switchChange=this.switchChange.bind(this)
+    this.switchChange=switchChange.bind(this)
     this.voteStart=this.voteStart.bind(this)
-    this.voteEnd=this.voteEnd.bind(this)
-    this.votePause=this.votePause.bind(this)
-    this.voteContinue=this.voteContinue.bind(this)
   }
   static getDerivedStateFromProps(nextProps, prevState){
+    //切换标签页时加载已保存数据或空表单
     if(nextProps.match.params.id!==prevState.voteId){
       return {
         voteSite:nextProps.voteSite||'',
@@ -47,20 +44,15 @@ class VoteCookieType extends React.PureComponent {
     return null;
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
+    //切换标签页后保存投票数据
     if(prevProps.match.params.id!==this.props.match.params.id){
       this.props.voteSave({...prevState})
     }
   }
-  switchChange(checked,name){
-    //switch切换
-    this.setState((prevState)=>({
-      [name]:checked
-    }))
-  }
   voteStart(){
     if(!this.state.voteNum||!this.state.voteNo||!this.state.voteSpeed) return;
     //开始投票
-    let data={
+    let option={
       voteId:this.state.voteId,
       voteSite:this.state.voteSite,
       voteNo:this.state.voteNo,
@@ -70,22 +62,7 @@ class VoteCookieType extends React.PureComponent {
       randomSpeed:this.state.randomSpeed,
       voteUA:this.state.voteUA
     };
-    this.props.voteCreate(data);
-  }
-  voteEnd(){
-    //终止投票
-    this.props.voteObj && this.props.voteObj.destroy()
-    this.props.voteEnd();
-  }
-  votePause(){
-    //暂停投票
-    this.props.voteObj && this.props.voteObj.pause()
-    this.props.votePause();
-  }
-  voteContinue(){
-    //继续投票
-    this.props.voteObj && this.props.voteObj.continue()
-    this.props.voteContinue();
+    this.props.voteStart(option);
   }
   render() {
     return (
@@ -128,15 +105,15 @@ class VoteCookieType extends React.PureComponent {
             }
             {
               this.props.isVoting && !this.props.isPaused &&
-              <Button type="button" round={true} color="warning"onClick={this.votePause}>暂 停</Button>
+              <Button type="button" round={true} color="warning"onClick={this.props.votePause}>暂 停</Button>
             }
             {
               this.props.isPaused &&
-              <Button type="button" round={true} color="warning"onClick={this.voteContinue}>继 续</Button>
+              <Button type="button" round={true} color="warning"onClick={this.props.voteContinue}>继 续</Button>
             }
             {
               this.props.isVoting &&
-              <Button type="button" round={true} color="danger" onClick={this.voteEnd}>终 止</Button>
+              <Button type="button" round={true} color="danger" onClick={this.props.voteEnd}>终 止</Button>
             }
           </ButtonBar>
         </Form>
@@ -149,11 +126,8 @@ class VoteCookieType extends React.PureComponent {
     );
   }
   componentWillUnmount(){
+    //销毁时保存投票数据
     this.props.voteSave(this.state)
-    /*this.state.voteObj && this.state.voteObj.destroy();
-    this.setState((prevState)=>({
-      voteObj:null
-    }));*/
   }
 }
 
@@ -166,22 +140,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    voteCreate: (data) => {
-      const voteObj=new BrushVote({
-        ...data,
-        localTest:data.voteSite==="",
-        complete:function () {
-          dispatch(voteEnd(data.voteId))
-        },
-        onLog:function (msg) {
-          dispatch(voteLog(data.voteId,msg))
-        }
-      });
-      dispatch(voteCreate({
-        ...data,
-        voteObj:voteObj
-      }))
-      voteObj.start();
+    voteStart: (option) => {
+      dispatch(voteCreate(option))
       dispatch(voteStart(ownProps.match.params.id))
     },
     voteEnd: () => {

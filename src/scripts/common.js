@@ -16,6 +16,19 @@ export const handleInputChange=function (event) {
   });
 }
 
+
+/**
+ * 处理switch切换
+ * @param checked 是否打开功能
+ * @param name 表单名(状态名称)
+ */
+export const switchChange = function(checked,name){
+  //switch切换
+  this.setState((prevState)=>({
+    [name]:checked
+  }))
+}
+
 /**
  *
  * @param {date | string} date
@@ -23,7 +36,7 @@ export const handleInputChange=function (event) {
  * @returns {string}
  */
 export const dateFormat=function(date, formatStr) {
-  if(!date instanceof Date){
+  if(!(date instanceof Date)){
     date=new Date(date);
   }
   let str = formatStr;

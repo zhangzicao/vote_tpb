@@ -2,6 +2,7 @@ const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
 const pkg = require('./package.json')
+require('./app_modules/Statistics')
 
 // 保持一个对于 window 对象的全局引用，如果你不这样做，
 // 当 JavaScript 对象被垃圾回收， window 会被自动地关闭
@@ -77,6 +78,11 @@ app.on('activate', () => {
 // BTFile.getAppPath()
 //
 app.on('ready', function () {
+  //刷票模块添加到window全局
   let BrushVote=require('./app_modules/BrushVote')
   global.BrushVote=BrushVote
+
+  //统计模块添加到window全局
+  let Statistics=require('./app_modules/Statistics')
+  global.Statistics=Statistics
 })

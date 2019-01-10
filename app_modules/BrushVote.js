@@ -2,7 +2,7 @@
 const http = require('http');
 const qs = require('querystring');
 
-function BrushVote({voteSite, voteNo, voteNum, voteSpeed, randomSpeed, voteUA, randomIP, complete, localTest, onLog}) {
+function BrushVote({voteSite, voteNo, voteNum, voteSpeed, randomSpeed, voteUA, randomIP, complete, onVote, localTest, onLog}) {
   if(!voteNum||!voteNo||!voteSpeed) return;
   this.voteSite=voteSite;
   this.voteNo=voteNo;
@@ -12,6 +12,7 @@ function BrushVote({voteSite, voteNo, voteNum, voteSpeed, randomSpeed, voteUA, r
   this.voteUA=voteUA;
   this.randomIP=randomIP;
   this.complete=complete;
+  this.onVote=onVote;
   this.localTest=localTest;
   this.onLog=onLog;
   this.init();
@@ -130,6 +131,14 @@ BrushVote.prototype.voteCallback= function(currTime,state) {
     this.destroy();
     typeof cpl==='function' && cpl(sct,ert,abt);
   }
+  this.onVote && this.onVote({
+    state:state,
+    voteNo:this.voteNo,
+    voteOptionName:this.voteOptionName,
+    voteSite:this.voteSite,
+    localTest:this.localTest,
+    completeDate:Date.now(),
+  })
 }
 
 //投票信息错误导致的终止

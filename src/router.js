@@ -5,7 +5,10 @@ import Welcome from "@/pages/Welcome"
 import Guide from "@/pages/Guide"
 import BrushVotesCookieType from "@/pages/BrushVotesCookieType"
 import VoteCookieType from "@/pages/VoteCookieType"
-import Statictics from "@/pages/Statictics"
+import StatisticsIndex from "@/pages/StatisticsIndex"
+import StatisticsNum from "@/pages/StatisticsNum"
+import StatisticsSuccessRate from "@/pages/StatisticsSuccessRate"
+import StatisticsList from "@/pages/StatisticsList"
 
 export default function () {
   return <HashRouter>
@@ -23,8 +26,17 @@ export default function () {
                 </Switch>
               </BrushVotesCookieType>
             )}></Route>
-            <Route path="/brushVotes/wechatType" component={BrushVotesCookieType}></Route>
-            <Route path="/statictics" component={Statictics}></Route>
+            <Route path="/brushVotes/wechatType"  ></Route>
+            <Route path="/statistics" children={props=>(
+                <StatisticsIndex {...props}>
+                  <Switch>
+                    <Route path="/statistics/num" component={StatisticsNum}></Route>
+                    <Route path="/statistics/successRate" component={StatisticsSuccessRate}></Route>
+                    <Route path="/statistics/list" component={StatisticsList}></Route>
+                    <Redirect to="/statistics/num" />
+                  </Switch>
+                </StatisticsIndex>
+            )}></Route>
             <Redirect to="/guide" />
           </Switch>
         </App>

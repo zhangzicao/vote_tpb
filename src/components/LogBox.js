@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './LogBox.less';
-import {dateFormat} from '../scripts/common';
 
 export default class LogBox extends React.PureComponent {
   constructor(props){
@@ -38,10 +37,10 @@ export default class LogBox extends React.PureComponent {
     return <div {...otherProps} className={"log-box "+(this.props.className||"")} style={{'height':this.props.height}}>
       <div className="log-box-bar">
         <button type="button" className="log-box-btn" onClick={this.clearAll}>
-          <img src={require('@/assets/icon_del.png')} width="14"/>
+          <img src={require('@/assets/icon_del.png')} width="14" alt="清空"/>
         </button>
         <button type="button" className="log-box-btn" onClick={this.scrollToBottom}>
-          <img src={require('@/assets/icon_tobottom.png')} width="14"/>
+          <img src={require('@/assets/icon_tobottom.png')} width="14" alt="滚至底部"/>
         </button>
       </div>
       <div className="log-box-content" ref={this.setRef}>

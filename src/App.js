@@ -31,7 +31,7 @@ class App extends Component {
       toIndex=1;
     }else if(props.location.pathname.search("/brushVotes/wechatType")>-1){
       toIndex=2;
-    }else if(props.location.pathname.search("/statictics")>-1){
+    }else if(props.location.pathname.search("/statistics")>-1){
       toIndex=3;
     }
     return toIndex
@@ -56,8 +56,8 @@ class App extends Component {
               active={this.state.activeIndex===2}>
           </MenubarItem>
           <MenubarItem
-              to="/statictics"
-              icon={require('@/assets/icon_nav_statictics.png')}
+              to="/statistics"
+              icon={require('@/assets/icon_nav_statistics.png')}
               active={this.state.activeIndex===3}>
           </MenubarItem>
           <MenubarItem

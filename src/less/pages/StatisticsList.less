@@ -1,0 +1,61 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixin";
+
+.table-default{
+  width: 100%;
+  table-layout: auto;
+  border-collapse: collapse;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+}
+.table-default th,.table-default td{
+  padding: 5px;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  font-size:14px;
+}
+.table-default th{
+  background: #f6f6f6;
+}
+
+.table-actions{
+  .clearfix();
+  padding: 0 10px 10px;
+  font-size: 14px;
+}
+.table-actions-left{
+  float: left;
+}
+.table-actions-right{
+  float: right;
+}
+.table-actions .input-wrap{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 15px;
+}
+.table-action-filters{
+  clear: both;
+  padding-bottom: 10px;
+}
+.table-bottom-bar{
+  .clearfix();
+  padding: 10px 10px 0;
+  font-size: 14px;
+}
+.table-info{
+  float: left;
+}
+.laypage-pagination{
+  float: right;
+}
+.clear-btn{
+  position: absolute;
+  top: 25px;
+  right: 10px;
+}
+.table-pagelength-select{
+  display: inline-block;
+  width: 70px;
+}
