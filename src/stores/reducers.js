@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { VOTE_CREATE, VOTE_PAUSE, VOTE_END, VOTE_START, VOTE_CONTINUE, VOTE_LOG, VOTE_LOG_CLEAR, VOTE_SAVE, STATISTICS_SETDATA, STATISTICS_ADD, STATISTICS_CLEAR, STATISTICS_TAB, STATISTICS_CHANGE_DAY,STATISTICS_CHANGE_PAGELENGTH,STATISTICS_CHANGE_CURRPAGE, STATISTICS_FILTERS, STATISTICS_SAVESTATE } from "@/stores/actions";
+import { VOTE_CREATE, VOTE_PAUSE, VOTE_END, VOTE_START, VOTE_CONTINUE, VOTE_LOG, VOTE_LOG_CLEAR, VOTE_SAVE, STATISTICS_SETDATA, STATISTICS_ADD, STATISTICS_CLEAR, STATISTICS_TAB, STATISTICS_CHANGE_DAY, STATISTICS_CHANGE_DAY_1, STATISTICS_CHANGE_DAYRANGE, STATISTICS_CHANGE_PAGELENGTH, STATISTICS_CHANGE_CURRPAGE, STATISTICS_FILTERS, STATISTICS_SAVESTATE } from "@/stores/actions";
 
 function vote(state = {}, action) {
   switch (action.type) {
@@ -66,7 +66,10 @@ function vote(state = {}, action) {
 
 function statistics(state = {
   activeIndex:0,//默认标签页
-  statisticsDay:1, //默认统计天数
+  viewDay1:'1', //默认统计天数(数量统计)
+  viewDay:'all', //默认统计天数
+  viewDayFrom:"", //默认统计图表显示的范围开始日期
+  viewDayTo:"", //默认统计图表显示的范围结束日期
   persistentState:{
     voteType:'', //筛选参数，类型（默认为全部，1为本地测试，2为远程地址）
     voteSite:'', //筛选参数，投票地址
@@ -74,6 +77,10 @@ function statistics(state = {
     voteOptionName:'', //筛选参数，投票目标
     dateFrom:'', //筛选参数，日期范围
     dateTo:'', //筛选参数，日期范围
+    viewDay1:'1',
+    viewDay:'all',
+    viewDayFrom:"", //默认统计图表显示的范围开始日期
+    viewDayTo:"", //默认统计图表显示的范围结束日期
   },
   pageLength:10, //分页大小
   currPage:1, //当前页
@@ -117,6 +124,16 @@ function statistics(state = {
     case STATISTICS_CHANGE_DAY:
       return Object.assign({}, state, {
         viewDay:action.viewDay,
+      })
+    case STATISTICS_CHANGE_DAY_1:
+      return Object.assign({}, state, {
+        viewDay1:action.viewDay1,
+      })
+    case STATISTICS_CHANGE_DAYRANGE:
+      return Object.assign({}, state, {
+        viewDay:'0',
+        viewDayFrom:action.viewDayFrom,
+        viewDayTo:action.viewDayTo,
       })
     case STATISTICS_CHANGE_CURRPAGE:
       return Object.assign({}, state, {

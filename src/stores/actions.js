@@ -16,7 +16,9 @@ export const STATISTICS_SETDATA = 'STATISTICS_SETDATA'
 export const STATISTICS_ADD = 'STATISTICS_ADD'
 export const STATISTICS_CLEAR = 'STATISTICS_CLEAR'
 export const STATISTICS_TAB = 'STATISTICS_TAB'
+export const STATISTICS_CHANGE_DAY_1 = 'STATISTICS_CHANGE_DAY_1'
 export const STATISTICS_CHANGE_DAY = 'STATISTICS_CHANGE_DAY'
+export const STATISTICS_CHANGE_DAYRANGE = 'STATISTICS_CHANGE_DAYRANGE'
 export const STATISTICS_CHANGE_PAGELENGTH = 'STATISTICS_CHANGE_PAGELENGTH'
 export const STATISTICS_CHANGE_CURRPAGE = 'STATISTICS_CHANGE_CURRPAGE'
 export const STATISTICS_SAVESTATE = 'STATISTICS_SAVESTATE'
@@ -143,11 +145,28 @@ export function statisticsTab(activeIndex) {
   }
 }
 
-//统计页面统计天数
+//统计页面统计天数(数量统计)
+export function statisticsDayChange1(value) {
+  return {
+    type: STATISTICS_CHANGE_DAY_1,
+    viewDay1:value
+  }
+}
+
+//统计页面统计天数（成功率统计）
 export function statisticsDayChange(value) {
   return {
     type: STATISTICS_CHANGE_DAY,
     viewDay:value
+  }
+}
+
+//统计页面统计范围
+export function statisticsDayRangeChange(value1,value2) {
+  return {
+    type: STATISTICS_CHANGE_DAYRANGE,
+    viewDayFrom:value1,
+    viewDayTo:value2,
   }
 }
 

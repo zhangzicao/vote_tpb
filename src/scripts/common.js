@@ -35,7 +35,7 @@ export const switchChange = function(checked,name){
  * @param {string} formatStr
  * @returns {string}
  */
-export const dateFormat=function(date, formatStr) {
+export const dateFormat = function(date, formatStr) {
   if(!(date instanceof Date)){
     date=new Date(date);
   }
@@ -62,4 +62,130 @@ export const dateFormat=function(date, formatStr) {
   str = str.replace(/s|S/g, date.getSeconds());
 
   return str;
+}
+
+/**
+ * 判断2个日期是否在同一天
+ * @param date1
+ * @param date2
+ * @returns {boolean}
+ */
+export const dateEqualDay = function(date1, date2){
+  if(!(date1 instanceof Date)) {
+    date1 = new Date(date1);
+  }
+  if(!(date2 instanceof Date)){
+    date2=new Date(date2);
+  }
+  return date1.getFullYear()===date2.getFullYear() && date1.getMonth()===date2.getMonth() && date1.getDate()===date2.getDate()
+}
+
+/**
+ * 判断2个日期是否在同一周
+ * @param date1
+ * @param date2
+ * @returns {boolean}
+ */
+export const dateEqualWeek = function(date1, date2){
+  if(!(date1 instanceof Date)) {
+    date1 = new Date(date1);
+  }
+  if(!(date2 instanceof Date)){
+    date2=new Date(date2);
+  }
+  if(date1.getDate()-date2.getDate()>7) return false;
+  let day1=date1.getDay();
+  let weekStart=date1.getDate()-day1;
+  return date2.getDate()>=weekStart && date2.getDate()<=weekStart+6
+}
+
+/**
+ * 判断2个日期是否在同一月
+ * @param date1
+ * @param date2
+ * @returns {boolean}
+ */
+export const dateEqualMonth = function(date1, date2){
+  if(!(date1 instanceof Date)) {
+    date1 = new Date(date1);
+  }
+  if(!(date2 instanceof Date)){
+    date2=new Date(date2);
+  }
+  return date1.getFullYear()===date2.getFullYear() && date1.getMonth()===date2.getMonth()
+}
+
+/**
+ * 判断2个日期是否在同一年
+ * @param date1
+ * @param date2
+ * @returns {boolean}
+ */
+export const dateEqualYear = function(date1, date2){
+  if(!(date1 instanceof Date)) {
+    date1 = new Date(date1);
+  }
+  if(!(date2 instanceof Date)){
+    date2=new Date(date2);
+  }
+  return date1.getFullYear()===date2.getFullYear()
+}
+
+/**
+ * 判断1个日期是否在一个范围内
+ * @param date
+ * @param dateFrom
+ * @param dateTo
+ * @param containLastDate=false 是否包含最好一天（dateTo会加一）
+ * @returns {boolean}
+ */
+export const dateIsBetween = function(date, dateFrom, dateTo, containLastDate){
+  if(!(date instanceof Date)) {
+    date = new Date(date);
+  }
+  if(!(dateFrom instanceof Date)){
+    dateFrom=new Date(dateFrom);
+  }
+  if(!(dateTo instanceof Date)){
+    dateTo=new Date(dateTo);
+  }
+  if(!!containLastDate){
+    dateTo=new Date(dateTo.getTime()+86400000);
+  }
+  return date.getTime()>=dateFrom.getTime() && date.getTime()<=dateTo.getTime()
+}
+
+/**
+ * 求两个时间的天数差 日期格式为 YYYY-MM-dd
+ * @param DateOne
+ * @param DateTwo
+ * @returns {number}
+ */
+export const getDaysBetween = function (DateOne, DateTwo) {
+  if(!(DateOne instanceof Date)) {
+    DateOne = new Date(DateOne);
+  }
+  DateOne = new Date(DateOne.getFullYear(),DateOne.getMonth(),DateOne.getDate());
+  if(!(DateTwo instanceof Date)){
+    DateTwo=new Date(DateTwo);
+  }
+  DateTwo = new Date(DateTwo.getFullYear(),DateTwo.getMonth(),DateTwo.getDate());
+
+  let cha = (DateOne.getTime() - DateTwo.getTime()) / 86400000;
+  return Math.abs(cha);
+}
+
+/**
+ * 获取一个日期当前月的日期数目
+ * @param date
+ * @returns {number}
+ */
+export const getDaysInMonth = function (date) {
+  if(!(date instanceof Date)) {
+    date = new Date(date);
+  }
+  if(date.getMonth()<11)
+    return (new Date(date.getFullYear(),date.getMonth()+1,0)).getDate();
+  else
+    return (new Date(date.getFullYear()+1,0,0)).getDate();
 }

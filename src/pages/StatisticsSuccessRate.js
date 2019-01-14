@@ -1,8 +1,11 @@
 import React  from 'react';
 import { connect } from 'react-redux'
-import {statisticsDayChange } from '../stores/actions'
+import {statisticsDayChange, statisticsDayRangeChange, statisticsSaveState} from '../stores/actions'
 import Select from "@/components/Select"
 import Input from "@/components/Input"
+import Button from "@/components/Button"
+import {Form,FormItem} from "@/components/Form"
+import { dateEqualDay, dateEqualWeek, dateEqualMonth, dateEqualYear, dateIsBetween } from "@/scripts/common"
 import Chart from 'chart.js';
 import "@/less/pages/StatisticsSuccessRate.less"
 
@@ -11,78 +14,151 @@ class StatisticsSuccessRate extends React.PureComponent {
     super(props);
     this.setRef=element => {
       this.ctx = element;
+      if(this.ctx){
+        this.ctx.width = element.offsetWidth;
+        this.ctx.height = element.offsetHeight;
+      }
     };
+    this.initChart=this.initChart.bind(this)
+    this.customRange=this.customRange.bind(this)
   }
   componentDidMount(){
-    if(this.ctx){
+    this.initChart();
+  }
+  componentDidUpdate(prevProps, prevState){
+    if(prevProps.viewDay!==this.props.viewDay
+        || (this.props.viewDay==='0' && ( prevProps.viewDayFrom !== this.props.viewDayFrom || prevProps.viewDayTo !== this.props.viewDayTo ))
+        || (!prevProps.data && this.props.data)){
+      this.initChart();
+    }
+  }
+  initChart(){
+    if(this.ctx && this.props.data){
+      if(this.myChart)
+        this.myChart.destroy();
+      //数据筛选
+      let filteredData=this.props.data.filter( (item) => {
+        if(this.props.viewDay==='1'){
+          return dateEqualDay(item.completeDate, new Date())
+        }else if(this.props.viewDay==='7'){
+          return dateEqualWeek(item.completeDate, new Date())
+        }else if(this.props.viewDay==='31'){
+          return dateEqualMonth(item.completeDate, new Date())
+        }else if(this.props.viewDay==='365'){
+          return dateEqualYear(item.completeDate, new Date())
+        }else if(this.props.viewDay==='0'){
+          return dateIsBetween(item.completeDate, this.props.viewDayFrom||0, this.props.viewDayTo||'2222/12/12')
+        }
+        return true;
+      });
+      let successTime=filteredData.filter((item)=>{
+        return item.state === 'success'
+      }).length
+      let errorTime=filteredData.filter((item)=>{
+        return item.state === 'error'
+      }).length
+      let abortedTime=filteredData.filter((item)=>{
+        return item.state === 'aborted'
+      }).length
+
       this.myChart=new Chart(this.ctx, {
-        type: 'bar',
+        type: 'pie',
         data: {
-          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+          labels: ["成功", "失败", "中断"],
           datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            data: [successTime, errorTime, abortedTime],
             backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)'
+              'rgba(76, 175, 80, 0.4)',
+              'rgba(244, 29, 29, 0.4)',
+              'rgba(255, 206, 86, 0.4)'
             ],
             borderColor: [
-              'rgba(255,99,132,1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)'
+              'rgba(76, 175, 80,1)',
+              'rgba(244, 29, 29, 1)',
+              'rgba(255, 206, 86, 1)'
             ],
             borderWidth: 1
           }]
         },
         options: {
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero:true
-              }
-            }]
+          layout:{
+            padding:{
+              top:10,
+              right:40,
+              bottom:40,
+              left:40,
+            }
           }
         }
       });
     }
   }
+  customRange(e){
+    e.preventDefault()
+    this.props.statisticsDayRangeChange(this.props.persistentState.viewDayFrom,this.props.persistentState.viewDayTo)
+  }
   render() {
+    let displayType={ display:this.props.persistentState.viewDay!=='0'?'none':null };
     return (
         <div className="chart-container">
-          <div className="f-r">
-            <div className="form-item">
-              <Input type="date" />
-            </div>—<Input type="date" />
-            <Select size="s" name="statisticsDay" value={this.props.statisticsDay} onChange={this.props.onDayChange}>
-              <option value="1">今天</option>
-              <option value="7">本周</option>
-              <option value="31">本月</option>
-              <option value="365">本年度</option>
-              <option value="0">自定义范围</option>
-            </Select>
+          <div className="view-day-select-wr">
+            <FormItem width="120px">
+              <Select size="s" name="viewDay" value={this.props.persistentState.viewDay} onChange={this.props.onDayChange}>
+                <option value="all">所有</option>
+                <option value="1">今天</option>
+                <option value="7">本周</option>
+                <option value="31">本月</option>
+                <option value="365">本年度</option>
+                <option value="0">范围</option>
+              </Select>
+            </FormItem>
           </div>
-          <canvas ref={this.setRef} height="500" className="my-chart"></canvas>
+          <Form onSubmit={this.customRange} className="view-day-range-form">
+            <FormItem labelText="范围：" width="260px" labelWidth="48px" style={displayType}>
+              <Input type="date" name="viewDayFrom" value={this.props.persistentState.viewDayFrom}  onChange={this.props.statisticsSaveState}/>
+            </FormItem>
+            <FormItem width="260px" prefix="—" horizontalPadding="0 25px" style={displayType}>
+              <Input type="date" name="viewDayTo" value={this.props.persistentState.viewDayTo}  onChange={this.props.statisticsSaveState}/>
+            </FormItem>
+            <FormItem width="90px" style={displayType}>
+              <Button size="s">确认</Button>
+            </FormItem>
+          </Form>
+          <canvas ref={this.setRef} className="my-chart"></canvas>
         </div>
     );
+  }
+  componentWillUnmount(){
+    if(this.myChart)
+      this.myChart.destroy();
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  let { data, recordsTotal, statisticsDay}=state.statistics;
-  return {data, recordsTotal,statisticsDay}
+  let { data, viewDay, viewDayFrom, viewDayTo, persistentState}=state.statistics;
+  return {data, viewDay, viewDayFrom, viewDayTo, persistentState}
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onDayChange: (e) => {
-      dispatch(statisticsDayChange(e.target.value))
+      let value = e.target.value;
+      dispatch(statisticsSaveState({
+        viewDay:value
+      }));
+      if( value!=='0')
+        dispatch(statisticsDayChange(value))
+    },
+    statisticsDayRangeChange: (from, to) => {
+      dispatch(statisticsDayRangeChange(from, to))
+    },
+    statisticsSaveState: (e) => {
+      //表单数据变化
+      let name=e.target.name;
+      let value=e.target.value;
+      dispatch(statisticsSaveState({
+        [name]:value
+      }));
     }
   }
 }

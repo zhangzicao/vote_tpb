@@ -6,6 +6,7 @@ import  Select from "@/components/Select"
 import  Input from "@/components/Input"
 import  Laypage from "@/components/Laypage"
 import  {dateFormat} from "@/scripts/common"
+import {Form,FormItem} from "@/components/Form"
 import "@/less/pages/StatisticsList.less"
 
 class StatisticsList extends React.PureComponent {
@@ -52,39 +53,39 @@ class StatisticsList extends React.PureComponent {
     return (
         <div className="content-padding">
           <Button className="clear-btn" color="danger" size="s" onClick={this.props.clearVoteRecord}>清空所有记录</Button>
-          <div className="table-actions">
-            <form className="table-action-filters"  onSubmit={this.filterSearch}>
-              类型：
-              <div className="input-wrap">
-                <Select size="s" name="voteType" value={this.props.persistentState.voteType} onChange={this.props.statisticsSaveState}>
-                  <option value="">全部</option>
-                  <option value="1">本地测试</option>
-                  <option value="2">远程地址</option>
-                </Select>
-              </div>
-              投票目标：
-              <div className="input-wrap"><Input name="voteOptionName" value={this.props.persistentState.voteOptionName} onChange={this.props.statisticsSaveState}/></div>
-              <br/>
-              投票地址：
-              <div className="input-wrap"><Input name="voteSite" value={this.props.persistentState.voteSite} disabled={this.props.persistentState.voteType==="1"} onChange={this.props.statisticsSaveState}/></div>
-              状态：
-              <div className="input-wrap">
-                <Select size="s" name="state" value={this.props.persistentState.state} onChange={this.props.statisticsSaveState}>
-                  <option value="">全部</option>
-                  <option value="success">成功</option>
-                  <option value="error">失败</option>
-                  <option value="aborted">中断</option>
-                </Select>
-              </div>
-              <br/>
-              时间范围：
-              <div className="input-wrap" style={{marginRight:0}}><Input type="date" name="dateFrom" value={this.props.persistentState.dateFrom}  onChange={this.props.statisticsSaveState}/></div>
-              —
-              <div className="input-wrap"><Input type="date" name="dateTo" value={this.props.persistentState.dateTo}  onChange={this.props.statisticsSaveState}/></div>
+          <Form className="form-panel" onSubmit={this.filterSearch}>
+            <FormItem labelText="类型：" width="220px" labelWidth="48px" >
+              <Select size="s" name="voteType" value={this.props.persistentState.voteType} onChange={this.props.statisticsSaveState}>
+                <option value="">全部</option>
+                <option value="1">本地测试</option>
+                <option value="2">远程地址</option>
+              </Select>
+            </FormItem>
+            <FormItem labelText="投票目标：" width="320px" labelWidth="80px">
+              <Input name="voteOptionName" value={this.props.persistentState.voteOptionName} onChange={this.props.statisticsSaveState}/>
+            </FormItem>
+            <FormItem labelText="状态：" width="220px" labelWidth="48px" >
+              <Select size="s" name="state" value={this.props.persistentState.state} onChange={this.props.statisticsSaveState}>
+                <option value="">全部</option>
+                <option value="success">成功</option>
+                <option value="error">失败</option>
+                <option value="aborted">中断</option>
+              </Select>
+            </FormItem>
+            <FormItem labelText="投票地址：" width="320px" labelWidth="80px">
+              <Input name="voteSite" value={this.props.persistentState.voteSite} disabled={this.props.persistentState.voteType==="1"} onChange={this.props.statisticsSaveState}/>
+            </FormItem>
+            <FormItem labelText="范围：" width="260px" labelWidth="48px">
+              <Input type="date" name="dateFrom" value={this.props.persistentState.dateFrom}  onChange={this.props.statisticsSaveState}/>
+            </FormItem>
+            <FormItem width="260px" prefix="—" horizontalPadding="0 25px">
+              <Input type="date" name="dateTo" value={this.props.persistentState.dateTo}  onChange={this.props.statisticsSaveState}/>
+            </FormItem>
+            <FormItem width="90px">
               <Button size="s">查询</Button>
-            </form>
-          </div>
-          <table className="table-default">
+            </FormItem>
+          </Form>
+          <table className="table-default table-1">
             <thead>
             <tr>
             <th width="240">投票目标</th>

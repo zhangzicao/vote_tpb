@@ -4,8 +4,9 @@ import './Form.less';
 
 export class Form extends React.PureComponent {
   render() {
+    let {className, children, ...otherProps}=this.props;
     return (
-        <form className={(this.props.className||"")+" form"}>
+        <form className={(this.props.className||"")+" form"} {...otherProps}>
           {this.props.children}
         </form>
     );
@@ -19,7 +20,7 @@ export class FormItem extends React.PureComponent {
     let leftPadding=pdArr[0]===""?null:pdArr[0]
     let rightPadding=pdArr.length!==2?leftPadding:pdArr[1]
     return (
-        <div className={'form-item '+(this.props.className||'')} style={{'width':this.props.width,'paddingLeft':leftPadding,'paddingRight':rightPadding,'lineHeight':this.props.lineHeight}}>
+        <div className={'form-item '+(this.props.className||'')} style={{'width':this.props.width,'paddingLeft':leftPadding,'paddingRight':rightPadding,'lineHeight':this.props.lineHeight,...this.props.style}}>
           {
             this.props.labelText &&
                 <label className="form-item-label" style={{'width':this.props.labelWidth}}>{this.props.labelText}</label>

@@ -60,11 +60,6 @@ class App extends Component {
               icon={require('@/assets/icon_nav_statistics.png')}
               active={this.state.activeIndex===3}>
           </MenubarItem>
-          <MenubarItem
-              to="/welcome"
-              icon={require('@/assets/icon_nav_guide.png')}
-              active={this.state.activeIndex===4}>
-          </MenubarItem>
         </Menubar>
         <MenubarRightContainer>
           {this.props.children}
