@@ -1,7 +1,8 @@
-const path = require('path');
 const Datastore = require('nedb');
+const {app} = require('electron');
+const appPath = app.getAppPath();
 
-const dbPath=path.join(__dirname,'../databases/statistics.db');
+const dbPath=appPath+'\\databases\\statistics.db';
 const db = {};
 
 db.statistics = new Datastore({

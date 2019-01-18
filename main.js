@@ -2,7 +2,6 @@ const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
 const pkg = require('./package.json')
-require('./app_modules/Statistics')
 
 // 保持一个对于 window 对象的全局引用，如果你不这样做，
 // 当 JavaScript 对象被垃圾回收， window 会被自动地关闭
@@ -11,15 +10,17 @@ let win
 function createWindow () {
   // 创建浏览器窗口。
   win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 900,
+    height: 650,
     autoHideMenuBar: true,
     fullscreenable: false,
+    resizable:pkg.DEV?true:false,
+    devTools:pkg.DEV?true:false,
     webPreferences: {
       javascript: true,
-      plugins: true,
-      nodeIntegration: false, // 不集成 Nodejs
-      webSecurity: false,
+      plugins: pkg.DEV?true:false,
+      nodeIntegration: pkg.DEV?false:false, // 是否在Web工作器中启用了Node集成
+      webSecurity: false, //当设置为 false, 它将禁用同源策略
       preload: path.join(__dirname, './public/renderer.js') // 但预加载的 js 文件内仍可以使用 Nodejs 的 API
     }
   })
@@ -28,16 +29,16 @@ function createWindow () {
   // package中的DEV为true时，开启调试窗口。为false时使用编译发布版本
   if(pkg.DEV){
     win.loadURL('http://localhost:3000/')
+    // 打开开发者工具。
+    win.webContents.openDevTools()
   }else{
+    win.setMenu(null)
     win.loadURL(url.format({
       pathname: path.join(__dirname, './build/index.html'),
       protocol: 'file:',
       slashes: true
     }))
   }
-
-  // 打开开发者工具。
-  // win.webContents.openDevTools()
 
   // 当 window 被关闭，这个事件会被触发。
   win.on('closed', () => {
@@ -78,6 +79,8 @@ app.on('activate', () => {
 // BTFile.getAppPath()
 //
 app.on('ready', function () {
+  global.DEV=pkg.DEV
+
   //刷票模块添加到window全局
   let BrushVote=require('./app_modules/BrushVote')
   global.BrushVote=BrushVote

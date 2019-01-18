@@ -1,5 +1,8 @@
 /*eslint-disable*/
-const http = require('http');
+const {app} = require('electron');
+const fs = require('fs');
+const appPath = app.getAppPath();
+let http = require('http');
 const qs = require('querystring');
 
 function BrushVote({voteSite, voteNo, voteNum, voteSpeed, randomSpeed, voteUA, randomIP, complete, onVote, localTest, onLog}) {
@@ -20,6 +23,7 @@ function BrushVote({voteSite, voteNo, voteNum, voteSpeed, randomSpeed, voteUA, r
 
 //初始化
 BrushVote.prototype.init=function () {
+  let obj=this;
   this.useTime=this.voteSpeed*this.voteNum;
   this.chunkTimes=[];
 
@@ -39,10 +43,53 @@ BrushVote.prototype.init=function () {
   this.abortedTime=0;//中断次数
   // this.exitTime=this.voteNum;//要终止的目标次数
 
+  this.$http=http;
   if(this.localTest){
-    this.hostname="localhost"
-    this.port="3000"
-    this.path="/static/testVote.html"
+    if(global.DEV !== true){
+      // this.hostname=undefined
+      // this.port=undefined
+      // this.path=appPath+"\\public\\static\\testVote.html"
+
+      this.$http={
+        request:function(option){
+          let evs1={
+
+          }
+          let on=function (eventName,f1) {
+            evs1[eventName]=f1
+          }
+          let end=function () {
+            let evs2={
+
+            }
+            let res={
+              setEncoding:()=>{},
+              headers:{},
+              on:function(eventName,f1){
+                evs2[eventName]=f1
+              },
+              write:()=>{}
+            }
+            evs1.response(res);
+            fs.readFile(appPath+"\\public\\static\\testVote.html",'utf-8',function (error,data) {
+              if(data){
+                evs2['data'](data);
+                evs2['end']();
+              }
+            })
+          }
+          return {
+            on:on,
+            end:end,
+            write:()=>{}
+          }
+        }
+      }
+    }else{
+      this.hostname="localhost"
+      this.port="3000"
+      this.path="/static/testVote.html"
+    }
   }else{
     let matchAr=this.voteSite.match(/(http:\/\/)?(https:\/\/)?([^\/\:]+)\:?(\d{2,4})?\/?([^\?\#]*)?(\?.*)?$/)||[];
 
@@ -134,7 +181,7 @@ BrushVote.prototype.voteCallback= function(currTime,state) {
   this.onVote && this.onVote({
     state:state,
     voteNo:this.voteNo,
-    voteOptionName:this.voteOptionName,
+    voteOptionName:this.voteOptionName||(this.voteNum+"号"),
     voteSite:this.voteSite,
     localTest:this.localTest,
     completeDate:Date.now(),
@@ -171,7 +218,7 @@ BrushVote.prototype.vote=function(currTime,callback) {
     headers['X-Forwarded-For']=ip
   }
 
-  const req = http.request({
+  const req = obj.$http.request({
     hostname: this.hostname,
     port: this.port,
     path: this.path,
@@ -266,7 +313,7 @@ BrushVote.prototype.getCode= function({currTime,voteOption,hiddenTimeStampEncode
     headers['X-Forwarded-For']=ip
   }
 
-  const req = http.request({
+  const req = obj.$http.request({
     hostname: this.hostname,
     port:this.port,
     path: this.localTest?'/static/testGetCode.txt':'/Front/VerifyCodeImage/Vote8Click.ashx',
@@ -335,7 +382,7 @@ BrushVote.prototype.voteHandle=function ({currTime,voteOption,hiddenTimeStampEnc
   }
 
   let content = qs.stringify(data);
-  const req = http.request({
+  const req = obj.$http.request({
     hostname: this.hostname,
     port:this.port,
     path: this.path,

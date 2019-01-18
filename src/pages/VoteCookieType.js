@@ -120,7 +120,7 @@ class VoteCookieType extends React.PureComponent {
         <LogBox
             logData={this.props.logData}
             onClearAll={this.props.onClearAll}
-            height="80px"
+            height="120px"
         />
     </div>
     );
