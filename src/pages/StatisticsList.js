@@ -8,6 +8,7 @@ import  Laypage from "@/components/Laypage"
 import  {dateFormat} from "@/scripts/common"
 import {Form,FormItem} from "@/components/Form"
 import "@/less/pages/StatisticsList.less"
+import {DialogPlugin} from "@/components/Dialog";
 
 class StatisticsList extends React.PureComponent {
   constructor(props){
@@ -132,8 +133,16 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     clearVoteRecord: () => {
-      dispatch(statisticsChangeCurrPage(1))
-      dispatch(clearVoteRecord())
+      let closeDialog=DialogPlugin.open({
+        type:'confirm',
+        title:"警告",
+        content:'是否要清空所有记录？',
+        btn1:function () {
+          closeDialog()
+          dispatch(statisticsChangeCurrPage(1))
+          dispatch(clearVoteRecord())
+        }
+      })
     },
     statisticsChangeCurrPage: (currPage) => {
       dispatch(statisticsChangeCurrPage(currPage))

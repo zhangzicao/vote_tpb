@@ -1,12 +1,18 @@
+const path = require('path');
 const Datastore = require('nedb');
 const {app} = require('electron');
-const appPath = app.getAppPath();
+const dbPath = app.getAppPath();
 
-const dbPath=appPath+'\\databases\\statistics.db';
+let sttDbPath;
+if(global.DEV){
+  sttDbPath=path.resolve(dbPath,'./databases/statistics.db');
+}else{
+  sttDbPath=path.resolve(dbPath,'../databases/statistics.db');
+}
 const db = {};
 
 db.statistics = new Datastore({
-  filename: dbPath,
+  filename: sttDbPath,
   autoload: true
 });
 

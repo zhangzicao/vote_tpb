@@ -1,6 +1,7 @@
 /*eslint-disable*/
 const {app} = require('electron');
 const fs = require('fs');
+const path = require('path');
 const appPath = app.getAppPath();
 let http = require('http');
 const qs = require('querystring');
@@ -71,7 +72,12 @@ BrushVote.prototype.init=function () {
               write:()=>{}
             }
             evs1.response(res);
-            fs.readFile(appPath+"\\public\\static\\testVote.html",'utf-8',function (error,data) {
+            let testpath;
+            if(option.path && option.path.search('testGetCode')>-1)
+              testpath=path.resolve(appPath,'../static/testGetCode.txt');
+            else
+              testpath=path.resolve(appPath,'../static/testVote.html');
+            fs.readFile(testpath,'utf-8',function (error,data) {
               if(data){
                 evs2['data'](data);
                 evs2['end']();

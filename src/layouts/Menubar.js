@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import './Menubar.less';
 
 // 主布局框架
-export class MenubarLayout extends Component {
+export class MenubarLayout extends React.PureComponent {
   render() {
     let componentClass = "menubar-layout "+(this.props.className||"");
     return (
@@ -15,7 +15,7 @@ export class MenubarLayout extends Component {
 }
 
 //左侧菜单条
-export class Menubar extends Component {
+export class Menubar extends React.PureComponent {
   render() {
     let styles={};
     if(this.props.bg){
@@ -37,7 +37,7 @@ Menubar.propTypes={
 
 
 //右侧主容器
-export class MenubarRightContainer extends Component {
+export class MenubarRightContainer extends React.PureComponent {
   render() {
     let styles="";
     if(this.props.bg){
@@ -55,7 +55,7 @@ MenubarRightContainer.propTypes={
 
 
 //菜单项
-export class MenubarItem extends Component {
+export class MenubarItem extends React.PureComponent {
   render() {
     let itemClass=classnames({
       'menubar-item':true,

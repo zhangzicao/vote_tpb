@@ -1,17 +1,23 @@
+const electron = require('electron')
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
 const pkg = require('./package.json')
+const Menu = electron.Menu;
+const Tray = electron.Tray;
 
 // 保持一个对于 window 对象的全局引用，如果你不这样做，
 // 当 JavaScript 对象被垃圾回收， window 会被自动地关闭
 let win
 
+let appTray = null;//托盘对象
+
 function createWindow () {
   // 创建浏览器窗口。
   win = new BrowserWindow({
-    width: 900,
+    width: 800,
     height: 650,
+    frame: false,
     autoHideMenuBar: true,
     fullscreenable: false,
     resizable:pkg.DEV?true:false,
@@ -40,13 +46,58 @@ function createWindow () {
     }))
   }
 
+  var trayMenuTemplate = [
+    {
+      label: '设置',
+      click: function () {} //打开相应页面
+    },
+    {
+      label: '帮助',
+      click: function () {}
+    },
+    {
+      label: '关于',
+      click: function () {}
+    },
+    {
+      label: '退出',
+      click: function () {
+        app.quit();
+      }
+    }
+  ];
+
+  //系统托盘图标目录
+  trayIcon = path.join(__dirname, 'public');//app是选取的目录
+
+  //图标的上下文菜单
+  const contextMenu = Menu.buildFromTemplate(trayMenuTemplate);
+  win.on('show', () => {
+    appTray && appTray.destroy()
+    appTray=null;
+  })
+  win.on('hide', () => {
+    appTray = new Tray(path.join(trayIcon, 'logo.ico'));//app.ico是app目录下的ico文件
+
+    //设置此托盘图标的悬停提示内容
+    appTray.setToolTip('我的托盘图标');
+
+    //设置此图标的上下文菜单
+    appTray.setContextMenu(contextMenu);
+
+    //单击右下角小图标显示应用
+    appTray.on('click', () => {
+      win.emit("requestWinShow");//web内部调用显示、更新redux
+    });
+  })
+
   // 当 window 被关闭，这个事件会被触发。
   win.on('closed', () => {
     // 取消引用 window 对象，如果你的应用支持多窗口的话，
     // 通常会把多个 window 对象存放在一个数组里面，
     // 与此同时，你应该删除相应的元素。
     win = null
-  })
+  });
 }
 
 // Electron 会在初始化后并准备

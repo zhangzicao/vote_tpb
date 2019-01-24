@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
 import '@/less/App.less';
 import {Menubar,MenubarLayout,MenubarItem,MenubarRightContainer} from "@/layouts/Menubar"
+import Frame from "@/layouts/Frame"
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeIndex:this.getIndexByLocation(props)
+      activeIndex:this.getIndexByLocation(props),
+      isOpen:true
     };
+    this.onRequestClose=this.onRequestClose.bind(this)
+  }
+  onRequestClose(){
+    this.setState({
+      isOpen:false
+    })
   }
   shouldComponentUpdate(nextProps, nextState) {
     //路由变化时阻止刷新，改变tab的state后刷新
+    if(nextState.isOpen!==this.state.isOpen) {
+      return true;
+    }
     if(nextState.activeIndex!==this.state.activeIndex) {
       return true;
     }
@@ -61,8 +72,10 @@ class App extends Component {
               active={this.state.activeIndex===3}>
           </MenubarItem>
         </Menubar>
-        <MenubarRightContainer>
-          {this.props.children}
+        <MenubarRightContainer className="menubar-right-container-1">
+          <Frame title="主页">
+            {this.props.children}
+          </Frame>
         </MenubarRightContainer>
       </MenubarLayout>
     );

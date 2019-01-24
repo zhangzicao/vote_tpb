@@ -23,11 +23,7 @@ class StatisticsSuccessRate extends React.PureComponent {
     this.initChart();
   }
   componentDidUpdate(prevProps, prevState){
-    console.log('componentDidUpdate')
-    console.log(prevProps.viewDay1)
-    console.log(this.props.viewDay1)
     if(prevProps.viewDay1!==this.props.viewDay1 || (!prevProps.data && this.props.data)){
-      console.log('initChart')
       this.initChart();
     }
   }
@@ -87,7 +83,6 @@ class StatisticsSuccessRate extends React.PureComponent {
           data[month]++;
         })
       }
-      console.log(labels)
 
       this.myChart=new Chart(this.ctx, {
         type: 'bar',

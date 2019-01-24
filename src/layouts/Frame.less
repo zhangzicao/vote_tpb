@@ -1,0 +1,132 @@
+@import "../less/abstracts/variables";
+@import "../less/abstracts/mixin";
+
+.frame-layout{
+  .abs-full();
+  .flexbox();
+  .flex-direction(column);
+}
+.frame-header{
+  padding-top: 18px;
+  padding-bottom: 6px;
+  .flex(none);
+  background: #ffffff;
+  border-bottom: 1px solid #e3e3e3;
+  box-shadow: 0 4px 4px rgba(0,0,0,.06);
+  -webkit-app-region: drag;
+}
+//弹窗显示时不启用拖拽
+.ReactModal__Body--open .frame-header{
+  -webkit-app-region: no-drag;
+}
+.frame-body{
+  .flex(auto);
+  .scrollable();
+  position: relative;
+}
+.frame-header-btns{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.frame-header-btn{
+  float: right;
+  display: block;
+  height: 20px;
+  line-height: 20px;
+  width: 30px;
+  text-align: center;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+}
+.frame-header-btn:hover{
+  background: #eee;
+}
+.frame-header-btn_close:hover{
+  background: #f12719;
+}
+.frame-header-title{
+  line-height: 1.8;
+  font-size: @font-size-l;
+  padding-left: 20px;
+  .ellipsis;
+}
+.frame-header-btn-icon{
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  vertical-align: top;
+  margin-top: 3px;
+  position: relative;
+}
+.icon_frame_min:before{
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 1px;
+  right: 1px;
+  height: 0;
+  border-top: 1px solid #555;
+}
+.icon_frame_max:before{
+  content: '';
+  display: block;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 10px;
+  height: 10px;
+  border: 1px solid #555;
+  background: #fff;
+  box-sizing: border-box;
+}
+.icon_frame_restore:before{
+  content: '';
+  display: block;
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  width: 9px;
+  height: 9px;
+  border: 1px solid #555;
+  background: #fff;
+  box-sizing: border-box;
+}
+.icon_frame_restore:after{
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  width: 9px;
+  height: 9px;
+  border: 1px solid #555;
+  background: #fff;
+  box-sizing: border-box;
+}
+.icon_frame_close:before{
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 1px;
+  right: 0;
+  height: 0;
+  border-top: 1px solid #555;
+  transform: rotate(45deg);
+}
+.icon_frame_close:after{
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 1px;
+  bottom: 0;
+  width: 0;
+  border-left: 1px solid #555;
+  transform: rotate(45deg);
+}
+.frame-header-btn:hover .icon_frame_close:before,.frame-header-btn:hover .icon_frame_close:after{
+  border-color: #fff;
+}

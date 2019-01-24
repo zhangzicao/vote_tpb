@@ -1,0 +1,238 @@
+@import "../less/abstracts/variables";
+@import "../less/abstracts/mixin";
+
+.dialog__overlay{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: @zindex-mask;
+  background-color:rgba(0,0,0,0.3);
+}
+.dialog__overlay_hide{
+  position: static;
+  background: none;
+}
+.dialog__container{
+  position: fixed;
+  display: block;
+  top: 40%;
+  left: -100%;
+  width: 300px;
+  background: #fff;
+  animation-name: bounceIn;
+  animation-duration: .3s;
+  outline: none;
+  box-shadow: 1px 1px 50px rgba(0,0,0,.3);
+  max-height: 100%;
+  z-index: @zindex-popout;
+}
+.dialog__title{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 30px 8px 15px;
+  background: #f6f6f6;
+  color: #111;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 26px;
+  cursor: move;
+  .unselect;
+}
+.dialog__title:before{
+  content: ' ';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid #e6e6e6;
+}
+.dialog__setwin{
+  position: absolute;
+  right: 12px;
+  top: 13px;
+  font-size: 0;
+  line-height: 0;
+}
+.dialog__close {
+  display: inline-block;
+  position: relative;
+  width: 16px;
+  height: 16px;
+  margin-left: 10px;
+}
+.dialog__close1:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 1px;
+  right: 0px;
+  height: 0;
+  border-top: 1px solid #555;
+  transform: rotate(45deg);
+}
+.dialog__close1:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 1px;
+  bottom: 0px;
+  width:0;
+  border-left: 1px solid #555;
+  transform: rotate(45deg);
+}
+.dialog__close1:hover {
+  opacity: 0.7;
+}
+.dialog__close2{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  background: #fff;
+  border: 1px solid #aaa;
+}
+.dialog__close2:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  right: 3px;
+  height: 0;
+  border-top: 1px solid #666;
+  transform: rotate(45deg);
+}
+.dialog__close2:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  bottom: 3px;
+  width:0;
+  border-left: 1px solid #666;
+  transform: rotate(45deg);
+}
+.dialog__close2:hover {
+  background: #cc1313;
+  border-color: #cc1313;
+}
+.dialog__close2:hover:before,.dialog__close2:hover:after {
+  border-color: #fff;
+}
+.dialog__content{
+  padding: 15px;
+  .scrollable;
+}
+.dialog__title~.dialog__content{
+  margin-top: 42px;
+}
+.dialog__btns~.dialog__content{
+  margin-bottom: 52px;
+}
+.dialog__btns{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: right;
+  .clearfix;
+  padding: 10px;
+}
+.dialog__btn{
+  display: inline-block;
+  margin-left: 10px;
+  border: 1px solid #ddd;
+  outline:none;
+  background: #eee;
+  height: 32px;
+  line-height: 22px;
+  min-width: 64px;
+  padding: 4px 10px;
+  box-sizing: border-box;
+  font-size:14px;
+  cursor: pointer;
+  transition:all 0.3s;
+  border-radius: 4px;
+  color: #444;
+}
+.dialog__btn:hover{
+  border-color: #ccc;
+  background: #ddd;
+}
+.dialog__btn_primary{
+  background: #2c8ad0;
+  color: #ffffff;
+  border-color: #2c8ad0;
+}
+.dialog__btn_primary:hover{
+  background: #2c7cbe;
+  border-color: #2c7cbe;
+}
+.dialog__btn_danger{
+  background: #cc2216;
+  color: #ffffff;
+  border-color: #cc2216;
+}
+.dialog__btn_danger:hover{
+  background: #a41300;
+  border-color: #a41300;
+}
+.dialog__input{
+  display: block;
+  width: 100%;
+  border: 1px solid #dddddd;
+  background: #ffffff;
+  border-radius: 4px;
+  padding: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 22px;
+  margin-top: 5px;
+  transition: border-color 0.3s;
+}
+.dialog__input:hover,.dialog__input:focus{
+  border-color: #2c8ad0;
+}
+input.dialog__input{
+  height: 32px;
+}
+textarea.dialog__input{
+  height: 70px;
+}
+
+//type page
+.dialog__container_page .dialog__content{
+  padding: 0;
+}
+//type toast
+.dialog__container_toast{
+  text-align: center;
+  background: rgba(0,0,0,.7);
+  color: #ffffff;
+  border-radius: 5px;
+}
+.dialog__container_toast .dialog__content{
+  padding: 7px 12px;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(.5)
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1)
+  }
+}

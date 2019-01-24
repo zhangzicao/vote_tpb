@@ -5,6 +5,7 @@ import Welcome from "@/pages/Welcome"
 import Guide from "@/pages/Guide"
 import BrushVotesCookieType from "@/pages/BrushVotesCookieType"
 import VoteCookieType from "@/pages/VoteCookieType"
+import VoteWechatType from "@/pages/VoteWechatType"
 import StatisticsIndex from "@/pages/StatisticsIndex"
 import StatisticsNum from "@/pages/StatisticsNum"
 import StatisticsSuccessRate from "@/pages/StatisticsSuccessRate"
@@ -26,7 +27,7 @@ export default function () {
                 </Switch>
               </BrushVotesCookieType>
             )}></Route>
-            <Route path="/brushVotes/wechatType"  ></Route>
+            <Route path="/brushVotes/wechatType"  component={VoteWechatType}></Route>
             <Route path="/statistics" children={props=>(
                 <StatisticsIndex {...props}>
                   <Switch>

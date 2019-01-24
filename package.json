@@ -1,6 +1,6 @@
 {
-  "name": "brush-votes-for-toupiaoba",
-  "version": "0.3.2",
+  "name": "vote_tpb",
+  "version": "0.3.4",
   "private": true,
   "dependencies": {
     "electron": "^3.0.10",
@@ -8,19 +8,20 @@
   },
   "devDependencies": {
     "babel-plugin-import": "^1.11.0",
-    "electron-packager": "^13.0.0",
     "chart.js": "^2.7.3",
     "classnames": "^2.2.6",
+    "electron-packager": "^13.0.0",
     "react": "^16.6.3",
+    "react-app-rewire-less": "^2.1.3",
+    "react-app-rewired": "^1.6.2",
     "react-dom": "^16.6.3",
+    "react-modal": "^3.8.1",
     "react-redux": "^6.0.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0",
-    "react-app-rewire-less": "^2.1.3",
-    "react-app-rewired": "^1.6.2"
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -29,7 +30,7 @@
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
     "electron-start": "electron .",
-    "electron-pack": "electron-packager . vote-tpb-0.3.2 --out dist --platform=win32 --arch=x64 --electron-version=3.0.10 --overwrite --icon=public/favicon.ico --asar=false --ignore=\"(dist|src|docs|.gitignore|.idea|LICENSE|README.md|webpack.config.js|config-overrides.js)\""
+    "electron-pack": "electron-packager . vote_tpb --out dist/0.3.4 --platform=win32 --arch=x64 --electron-version=3.0.10 --overwrite --icon=public/logo.ico --asar --ignore=\"(dist|src|docs|.gitignore|.idea|LICENSE|README.md|webpack.config.js|config-overrides.js|databases|public/static)\" --extra-resource=databases  --extra-resource=public/static"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -44,5 +45,5 @@
   ],
   "main": "main.js",
   "homepage": ".",
-  "DEV": false
+  "DEV": true
 }

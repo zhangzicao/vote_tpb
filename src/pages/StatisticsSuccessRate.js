@@ -1,10 +1,10 @@
 import React  from 'react';
 import { connect } from 'react-redux'
-import {statisticsDayChange, statisticsDayRangeChange, statisticsSaveState} from '../stores/actions'
 import Select from "@/components/Select"
 import Input from "@/components/Input"
 import Button from "@/components/Button"
 import {Form,FormItem} from "@/components/Form"
+import {statisticsDayChange, statisticsDayRangeChange, statisticsSaveState} from '../stores/actions'
 import { dateEqualDay, dateEqualWeek, dateEqualMonth, dateEqualYear, dateIsBetween } from "@/scripts/common"
 import Chart from 'chart.js';
 import "@/less/pages/StatisticsSuccessRate.less"

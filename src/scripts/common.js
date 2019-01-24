@@ -189,3 +189,17 @@ export const getDaysInMonth = function (date) {
   else
     return (new Date(date.getFullYear()+1,0,0)).getDate();
 }
+
+//将#XXXXXX颜色格式转换为RGB格式，并附加上透明度
+export const ConvertToRGBA = function (hex, opacity) {
+  if (!/#?\d+/g.test(hex)) return hex; //如果是“red”格式的颜色值，则不转换。//正则错误，参考后面的PS内容
+  var h = hex.charAt(0) == "#" ? hex.substring(1) : hex,
+      r = parseInt(h.substring(0, 2), 16),
+      g = parseInt(h.substring(2, 4), 16),
+      b = parseInt(h.substring(4, 6), 16),
+      a = opacity;
+  if (typeof a==='undefined')
+    return "rgb(" + r + "," + g + "," + b + ")";
+  else
+    return "rgba(" + r + "," + g + "," + b + "," + a + ")";
+}
