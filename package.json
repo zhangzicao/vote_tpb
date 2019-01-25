@@ -1,6 +1,6 @@
 {
   "name": "vote_tpb",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "private": true,
   "dependencies": {
     "electron": "^3.0.10",
@@ -30,7 +30,7 @@
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
     "electron-start": "electron .",
-    "electron-pack": "electron-packager . vote_tpb --out dist/0.3.4 --platform=win32 --arch=x64 --electron-version=3.0.10 --overwrite --icon=public/logo.ico --asar --ignore=\"(dist|src|docs|.gitignore|.idea|LICENSE|README.md|webpack.config.js|config-overrides.js|databases|public/static)\" --extra-resource=databases  --extra-resource=public/static"
+    "electron-pack": "electron-packager . vote_tpb --out dist/0.3.5 --platform=win32 --arch=x64 --electron-version=3.0.10 --overwrite --icon=public/logo.ico --asar --ignore=\"(dist|src|docs|.gitignore|.idea|LICENSE|README.md|webpack.config.js|config-overrides.js|databases|public/static)\" --extra-resource=databases  --extra-resource=public/static"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,5 +45,5 @@
   ],
   "main": "main.js",
   "homepage": ".",
-  "DEV": true
+  "DEV": false
 }

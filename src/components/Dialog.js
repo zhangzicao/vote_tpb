@@ -144,9 +144,15 @@ export default class Dialog extends React.PureComponent {
         }
         if(positionStr.search('top')>-1||(positionStr.length<=2&&positionStr.search('t')>-1)){
           y = 0
+          if(this.props.type==='toast'){
+            y=y+20
+          }
         }
         if(positionStr.search('bottom')>-1||(positionStr.length<=2&&positionStr.search('b')>-1)){
           y = window.innerHeight-this.$content.offsetHeight;
+          if(this.props.type==='toast'){
+            y=y-20
+          }
         }
       }else{
         x=positionStr[0]||0;
@@ -301,7 +307,8 @@ export const DialogPlugin ={
     let divEl = document.createElement('div');
     // document.getElementsByTagName('body')[0].appendChild(divEl)
     let closeFn=function(){
-      ReactDOM.unmountComponentAtNode(divEl)
+      if(divEl)
+        ReactDOM.unmountComponentAtNode(divEl)
       divEl=null;
     }
     let dialog = React.createElement(
@@ -318,15 +325,15 @@ export const DialogPlugin ={
     return closeFn;
   },
   alert:function (content,option,btn1,btn2) {
-    DialogPlugin.open(content,{...option,type:'alert'},btn1,btn2);
+    return DialogPlugin.open(content,{...option,type:'alert'},btn1,btn2);
   },
   confirm:function (content,option,btn1,btn2) {
-    DialogPlugin.open(content,{...option,type:'confirm'},btn1,btn2);
+    return DialogPlugin.open(content,{...option,type:'confirm'},btn1,btn2);
   },
   prompt:function (content,option,btn1,btn2) {
-    DialogPlugin.open(content,{...option,type:'prompt'},btn1,btn2);
+    return DialogPlugin.open(content,{...option,type:'prompt'},btn1,btn2);
   },
   toast:function (content,option,btn1,btn2) {
-    DialogPlugin.open(content,{...option,type:'toast'},btn1,btn2);
+    return DialogPlugin.open(content,{...option,type:'toast'},btn1,btn2);
   }
 };

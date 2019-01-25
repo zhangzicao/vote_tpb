@@ -7,21 +7,11 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeIndex:this.getIndexByLocation(props),
-      isOpen:true
+      activeIndex:this.getIndexByLocation(props)
     };
-    this.onRequestClose=this.onRequestClose.bind(this)
-  }
-  onRequestClose(){
-    this.setState({
-      isOpen:false
-    })
   }
   shouldComponentUpdate(nextProps, nextState) {
     //路由变化时阻止刷新，改变tab的state后刷新
-    if(nextState.isOpen!==this.state.isOpen) {
-      return true;
-    }
     if(nextState.activeIndex!==this.state.activeIndex) {
       return true;
     }
@@ -73,7 +63,7 @@ class App extends Component {
           </MenubarItem>
         </Menubar>
         <MenubarRightContainer className="menubar-right-container-1">
-          <Frame title="主页">
+          <Frame title="刷票吧">
             {this.props.children}
           </Frame>
         </MenubarRightContainer>

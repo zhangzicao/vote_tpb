@@ -137,7 +137,7 @@ export class FrameBody extends React.PureComponent {
     let {className,children,...otherProps}=this.props;
     return (
         <div className={"frame-body "+(className||"")} {...otherProps}>
-          {children}
+          <div className="frame-body-inner">{children}</div>
           </div>
     );
   }

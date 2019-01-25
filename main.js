@@ -15,8 +15,8 @@ let appTray = null;//托盘对象
 function createWindow () {
   // 创建浏览器窗口。
   win = new BrowserWindow({
-    width: 800,
-    height: 650,
+    width: 810,
+    height: 710,
     frame: false,
     autoHideMenuBar: true,
     fullscreenable: false,
