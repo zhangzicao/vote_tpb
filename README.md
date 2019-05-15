@@ -40,14 +40,12 @@ npm run build
 # 构建web应用并打印报告
 npm run build --report
 
-# 开发时使用软件窗口打开开发地址 localhost:3000
+# 在开发时运行npm run start之后，使用软件窗口打开开发地址 localhost:3000
 npm run electron-start
 
 # build后使用，通过已经构建好的web页面，构建桌面应用
 npm run electron-pack
 
-# 测试
-npm run test
 ```
 
 ## DEV
@@ -63,6 +61,10 @@ npm run test
 **install说明**
 
 只有web引用而App端不引用的模块需要放入devDependencies内，install时带参数 --save-dev。用以保证这些模块不会重复打包到App中。（因为已构建进web中）
+
+**命令说明**
+
+ 在开发时先运行npm run start打开热服务器，再运行npm run electron-start 使用软件窗口打开开发地址 localhost:3000。
 
 
 ## PACKAGE

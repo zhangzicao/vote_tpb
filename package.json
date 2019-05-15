@@ -45,5 +45,5 @@
   ],
   "main": "main.js",
   "homepage": ".",
-  "DEV": false
+  "DEV": true
 }
