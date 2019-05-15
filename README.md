@@ -76,3 +76,7 @@ npm run electron-pack
 **打包配置**
 
 打包时设置package.json的"DEV"为false
+
+**命令说明**
+
+先运行 npm run build 打开web项目，再运行 npm run electron-pack 构建桌面应用
